@@ -6,8 +6,11 @@ import {
   Button,
   Box,
 } from '@mui/material';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -18,9 +21,19 @@ const Login = () => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('SUCCESS');
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/auth/login`,
+        { email, password }
+      );
+      localStorage.setItem('token', res.data.token);
+      navigate('/dashboard');
+    } catch (err) {
+      console.error(err.response.data);
+      // Handle errors, e.g., show an alert
+    }
   };
 
   return (
