@@ -14,10 +14,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  role: { // New field for role
+  role: {
     type: String,
     enum: ['user', 'admin'],
     default: 'user',
+  },
+  isSuspended: { // New field for suspension status
+    type: Boolean,
+    default: false,
   },
   date: {
     type: Date,
