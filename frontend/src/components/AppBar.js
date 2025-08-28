@@ -42,6 +42,9 @@ export default function ButtonAppBar() {
                   User Management
                 </Button>
               )}
+              <Button color="inherit" onClick={() => navigate('/profile')}> {/* Add Profile button */}
+                Profile
+              </Button>
               <Button color="inherit" onClick={handleLogout}>
                 Logout
               </Button>

@@ -5,7 +5,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
-import UserManagement from './pages/UserManagement'; // Import UserManagement
+import UserManagement from './pages/UserManagement';
+import Profile from './pages/Profile'; // Import Profile
 import './App.css';
 
 function App() {
@@ -24,11 +25,19 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route // New route for UserManagement
+          <Route
             path="/admin/users"
             element={
-              <PrivateRoute adminOnly={true}> {/* Add adminOnly prop */}
+              <PrivateRoute adminOnly={true}>
                 <UserManagement />
+              </PrivateRoute>
+            }
+          />
+          <Route // New route for Profile
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
               </PrivateRoute>
             }
           />
