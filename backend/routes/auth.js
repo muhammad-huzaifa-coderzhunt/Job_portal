@@ -58,7 +58,7 @@ router.post(
         payload,
         process.env.JWT_SECRET,
         {
-          expiresIn: 360000,
+          expiresIn: process.env.JWT_EXPIRES_IN || 360000,
         },
         (err, token) => {
           if (err) throw err;
@@ -67,7 +67,7 @@ router.post(
       );
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server error');
+      res.status(500).send(`Server Error: ${err.message}`);
     }
   }
 );
@@ -135,7 +135,7 @@ router.get('/me', auth, async (req, res) => {
     res.json(user);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).send(`Server Error: ${err.message}`);
   }
 });
 
