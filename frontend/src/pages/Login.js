@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import jwt_decode from 'jwt-decode'; // Import jwt_decode
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,14 +25,12 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/login`,
+        `${process.env.REACT_APP_API_URL}auth/login`,
         { email, password }
       );
       localStorage.setItem('token', res.data.token);
 
-      // Decode the token to get user role and store it
-      const decoded = jwt_decode(res.data.token);
-      localStorage.setItem('userRole', decoded.user.role); // Store user role
+      localStorage.setItem('userRole', res.user?.role);
 
       navigate('/dashboard');
     } catch (err) {
