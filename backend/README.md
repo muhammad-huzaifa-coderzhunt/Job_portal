@@ -26,7 +26,7 @@ This is the backend API for the Job Portal application. It is built with Node.js
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/your-username/job-portal.git
+    git clone https://github.com/muhammad-huzaifa-coderzhunt/job-portal.git
     ```
 2.  Navigate to the backend directory:
     ```bash
