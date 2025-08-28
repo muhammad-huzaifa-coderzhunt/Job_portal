@@ -95,7 +95,7 @@ const UserManagement = () => {
             {users.map((user) => (
               <TableRow
                 key={user._id}
-                sx={{ '&:last-child td, '&:last-child th': { border: 0 } }}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
                   {user.name}
