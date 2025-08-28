@@ -11,9 +11,11 @@ import { useNavigate } from 'react-router-dom';
 export default function ButtonAppBar() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const userRole = localStorage.getItem('userRole'); // Get user role
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userRole'); // Remove user role on logout
     navigate('/login');
   };
 
@@ -34,9 +36,16 @@ export default function ButtonAppBar() {
             Job Portal
           </Typography>
           {token ? (
-            <Button color="inherit" onClick={handleLogout}>
-              Logout
-            </Button>
+            <>
+              {userRole === 'admin' && ( // Conditionally render for admin
+                <Button color="inherit" onClick={() => navigate('/admin/users')}>
+                  User Management
+                </Button>
+              )}
+              <Button color="inherit" onClick={handleLogout}>
+                Logout
+              </Button>
+            </>
           ) : (
             <>
               <Button color="inherit" onClick={() => navigate('/login')}>
