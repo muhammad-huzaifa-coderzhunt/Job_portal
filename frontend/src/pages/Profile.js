@@ -1,3 +1,4 @@
+// Import necessary packages from React and Material-UI
 import React, { useState, useEffect } from 'react';
 import {
   Container,
@@ -8,12 +9,15 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 
+// The component for the user's profile page
 const Profile = () => {
+  // State to hold the form data
   const [formData, setFormData] = useState({
     name: '',
     email: '',
   });
 
+  // Fetch the user's profile data when the component mounts
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -23,10 +27,12 @@ const Profile = () => {
             'x-auth-token': token,
           },
         };
+        // Send a GET request to the /auth/me endpoint to get the user's data
         const res = await axios.get(
           `${process.env.REACT_APP_API_URL}/auth/me`,
           config
         );
+        // Set the form data with the fetched user data
         setFormData({
           name: res.data.name,
           email: res.data.email,
@@ -40,23 +46,16 @@ const Profile = () => {
 
   const { name, email } = formData;
 
+  // Function to handle form input changes
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  // Function to handle form submission
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
-      const config = {
-        headers: {
-          'x-auth-token': token,
-          'Content-Type': 'application/json',
-        },
-      };
-      // Assuming there will be a PUT /api/v1/users/:id route for updating user
-      // For now, just log the data
+      // TODO: Implement the logic to update the user's profile
       console.log('Update profile data:', formData);
-      // await axios.put(`${process.env.REACT_APP_API_URL}/users/${userId}`, formData, config);
       alert('Profile updated successfully (simulated)');
     } catch (err) {
       console.error(err.response.data);
@@ -77,6 +76,7 @@ const Profile = () => {
           User Profile
         </Typography>
         <Box component="form" onSubmit={onSubmit} noValidate sx={{ mt: 1 }}>
+          {/* Name input field */}
           <TextField
             margin="normal"
             required
@@ -89,6 +89,7 @@ const Profile = () => {
             value={name}
             onChange={onChange}
           />
+          {/* Email input field (disabled) */}
           <TextField
             margin="normal"
             required
@@ -99,8 +100,9 @@ const Profile = () => {
             autoComplete="email"
             value={email}
             onChange={onChange}
-            disabled // Email usually not editable
+            disabled
           />
+          {/* Submit button */}
           <Button
             type="submit"
             fullWidth
@@ -115,4 +117,5 @@ const Profile = () => {
   );
 };
 
+// Export the Profile component
 export default Profile;

@@ -1,3 +1,4 @@
+// Import necessary packages from React and Material-UI
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -8,14 +9,16 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 
+// The component for the application's app bar
 export default function ButtonAppBar() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  const userRole = localStorage.getItem('userRole'); // Get user role
+  const userRole = localStorage.getItem('userRole');
 
+  // Function to handle user logout
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('userRole'); // Remove user role on logout
+    localStorage.removeItem('userRole');
     navigate('/login');
   };
 
@@ -23,6 +26,7 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
+          {/* Menu icon */}
           <IconButton
             size="large"
             edge="start"
@@ -32,28 +36,35 @@ export default function ButtonAppBar() {
           >
             <MenuIcon />
           </IconButton>
+          {/* Title of the application */}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Job Portal
           </Typography>
+          {/* Conditional rendering based on authentication status */}
           {token ? (
             <>
-              {userRole === 'admin' && ( // Conditionally render for admin
+              {/* Conditionally render User Management button for admin users */}
+              {userRole === 'admin' && (
                 <Button color="inherit" onClick={() => navigate('/admin/users')}>
                   User Management
                 </Button>
               )}
-              <Button color="inherit" onClick={() => navigate('/profile')}> {/* Add Profile button */}
+              {/* Profile button */}
+              <Button color="inherit" onClick={() => navigate('/profile')}>
                 Profile
               </Button>
+              {/* Logout button */}
               <Button color="inherit" onClick={handleLogout}>
                 Logout
               </Button>
             </>
           ) : (
             <>
+              {/* Login button */}
               <Button color="inherit" onClick={() => navigate('/login')}>
                 Login
               </Button>
+              {/* Register button */}
               <Button color="inherit" onClick={() => navigate('/register')}>
                 Register
               </Button>

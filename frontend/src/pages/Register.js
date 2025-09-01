@@ -1,3 +1,4 @@
+// Import necessary packages from React and Material-UI
 import React, { useState } from 'react';
 import {
   Container,
@@ -7,7 +8,9 @@ import {
   Box,
 } from '@mui/material';
 
+// The component for the registration page
 const Register = () => {
+  // State to hold the form data
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,14 +20,18 @@ const Register = () => {
 
   const { name, email, password, password2 } = formData;
 
+  // Function to handle form input changes
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  // Function to handle form submission
   const onSubmit = (e) => {
     e.preventDefault();
+    // Check if the passwords match
     if (password !== password2) {
       console.log('Passwords do not match');
     } else {
+      // TODO: Implement the registration logic
       console.log('SUCCESS');
     }
   };
@@ -43,6 +50,7 @@ const Register = () => {
           Sign up
         </Typography>
         <Box component="form" onSubmit={onSubmit} noValidate sx={{ mt: 1 }}>
+          {/* Name input field */}
           <TextField
             margin="normal"
             required
@@ -55,6 +63,7 @@ const Register = () => {
             value={name}
             onChange={onChange}
           />
+          {/* Email input field */}
           <TextField
             margin="normal"
             required
@@ -66,6 +75,7 @@ const Register = () => {
             value={email}
             onChange={onChange}
           />
+          {/* Password input field */}
           <TextField
             margin="normal"
             required
@@ -78,6 +88,7 @@ const Register = () => {
             value={password}
             onChange={onChange}
           />
+          {/* Confirm password input field */}
           <TextField
             margin="normal"
             required
@@ -90,6 +101,7 @@ const Register = () => {
             value={password2}
             onChange={onChange}
           />
+          {/* Submit button */}
           <Button
             type="submit"
             fullWidth
@@ -104,4 +116,5 @@ const Register = () => {
   );
 };
 
+// Export the Register component
 export default Register;
